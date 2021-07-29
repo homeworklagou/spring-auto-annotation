@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+<!--    id标识对象-->
+    <bean id="accountDao" class="com.lagou.edu.dao.impl.JdbcAccountDaoImpl">
+        <property name="ConnectionUtils" ref="connectionUtils"></property>
+    </bean>
+
+    <bean id="transferService" class="com.lagou.edu.service.impl.TransferServiceImpl">
+        <property name="AccountDao" ref="accountDao"></property>
+    </bean>
+
+    <bean id="connectionUtils" class="com.lagou.edu.utils.ConnectionUtils"></bean>
+    <bean id="transactionManager" class="com.lagou.edu.utils.TransactionManager">
+        <property name="ConnectionUtils" ref="connectionUtils"></property>
+    </bean>
+    <bean id="proxyFactory" class="com.lagou.edu.factory.ProxyFactory">
+        <property name="TransactionManager" ref="transactionManager"></property>
+    </bean>
+</beans>
